@@ -10,7 +10,6 @@ const firebaseConfig = {
   storageBucket: "jasabelanjapasar-3d380.firebasestorage.app",
   messagingSenderId: "1008130342807",
   appId: "1:1008130342807:web:f07ffb9ecf0b2f03298ed2"
-measurementId: "G-1F3DW1XK2L"
 };
 
 // Fungsi untuk menginisialisasi Firebase
