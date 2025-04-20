@@ -4,12 +4,13 @@
 
 // Konfigurasi Firebase (ganti dengan konfigurasi Firebase Anda sendiri)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-app.firebaseapp.com",
-  projectId: "your-app",
-  storageBucket: "your-app.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBmgBbAHg-KNZ_jHRaBdsx0FtV0MkSmjlU",
+  authDomain: "jasabelanjapasar-3d380.firebaseapp.com",
+  projectId: "jasabelanjapasar-3d380",
+  storageBucket: "jasabelanjapasar-3d380.firebasestorage.app",
+  messagingSenderId: "1008130342807",
+  appId: "1:1008130342807:web:f07ffb9ecf0b2f03298ed2"
+measurementId: "G-1F3DW1XK2L"
 };
 
 // Fungsi untuk menginisialisasi Firebase
