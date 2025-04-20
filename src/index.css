@@ -1,0 +1,1326 @@
+:root {
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      font-weight: 400;
+
+      color-scheme: light dark;
+      color: rgba(255, 255, 255, 0.87);
+      background-color: #242424;
+
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      --primary-color: #4CAF50;
+      --primary-dark: #45a049;
+      --text-light: #eee;
+      --text-dark: #333;
+      --bg-dark-1: #242424;
+      --bg-dark-2: #2c2c2c;
+      --bg-dark-3: #333;
+      --bg-dark-4: #444;
+      --border-dark: #555;
+
+      --bg-light-1: #ffffff;
+      --bg-light-2: #f8f8f8;
+      --bg-light-3: #eee;
+      --border-light: #ddd;
+    }
+
+    body {
+      margin: 0;
+      /* display: flex; */ /* Hapus flex agar tidak selalu center */
+      /* place-items: center; */
+      min-width: 320px;
+      min-height: 100vh;
+      background-color: var(--bg-dark-1); /* Gunakan variabel */
+    }
+
+    #root {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem; /* Kurangi padding horizontal root */
+      /* text-align: center; */ /* Hapus text-align center global */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--bg-dark-3);
+      /* padding: 1rem 0; */ /* Dihapus karena padding diatur di bawah */
+      margin-bottom: 2rem;
+      border-radius: 0 0 8px 8px; /* Radius hanya di bawah */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem; /* Sesuaikan padding header */
+      position: sticky; /* Buat header sticky */
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .header-left, .header-center, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-left {
+      flex-grow: 1; /* Biarkan bagian kiri tumbuh */
+    }
+    .header-center {
+      flex-grow: 2; /* Beri lebih banyak ruang untuk search bar */
+      justify-content: center;
+    }
+    .header-right {
+      flex-grow: 1; /* Biarkan bagian kanan tumbuh */
+      justify-content: flex-end;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      /* justify-content: center; */ /* Tidak perlu center lagi */
+      gap: 1rem; /* Kurangi gap sedikit */
+    }
+
+    nav a, .login-link, .user-menu a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem; /* Sesuaikan padding nav link */
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 1rem; /* Sesuaikan font size */
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap; /* Agar tidak wrap */
+    }
+
+    nav a:hover, .login-link:hover, .user-menu a:hover {
+      background-color: var(--bg-dark-4);
+    }
+    nav a.active, .login-link.active, .user-menu a.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .cart-icon-link {
+        position: relative;
+        padding: 0.5rem;
+        color: var(--text-light);
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+    .cart-icon-link:hover {
+        background-color: var(--bg-dark-4);
+    }
+     .cart-icon-link.active {
+        background-color: var(--primary-color);
+     }
+
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -8px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logout-button-header {
+      background: none;
+      border: none;
+      color: #ff8a8a; /* Warna merah muda untuk logout */
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .logout-button-header:hover {
+      background-color: rgba(255, 138, 138, 0.2);
+      color: #ff6b6b;
+    }
+
+
+    main {
+      padding: 2rem;
+      background-color: var(--bg-dark-2);
+      border-radius: 8px;
+      min-height: 60vh; /* Pastikan main content cukup tinggi */
+      flex-grow: 1; /* Agar main content mengisi sisa ruang */
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 2rem; /* Beri jarak sebelum footer */
+    }
+
+    footer {
+      margin-top: auto; /* Dorong footer ke bawah */
+      padding: 1.5rem 0;
+      color: #aaa;
+      font-size: 0.9rem;
+      text-align: center;
+      background-color: var(--bg-dark-3);
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 8px 8px 0 0; /* Radius hanya di atas */
+    }
+
+    h1, h2 {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      text-align: center; /* Pusatkan judul utama */
+    }
+
+    /* --- Hero Section --- */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center; /* Pusatkan teks di hero */
+    }
+
+    .hero-section img {
+      max-width: 100%;
+      height: auto;
+      max-height: 350px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .hero-section h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 1.5rem;
+    }
+
+    .cta-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* --- Search Bar --- */
+    .search-bar-container {
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-dark-4);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      width: 100%; /* Lebar penuh di dalam containernya */
+      max-width: 400px; /* Batasi lebar maksimum */
+    }
+
+    .search-bar-container input {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      outline: none;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      width: 100%; /* Input mengisi sisa ruang */
+      /* transition: width 0.3s ease-in-out; */ /* Hapus transisi lebar */
+    }
+     /* .search-bar-container input:focus {
+       width: 250px;
+     } */
+
+    .search-bar-container input::placeholder {
+      color: #aaa;
+    }
+
+    /* --- Product List --- */
+    .product-list-container {
+      width: 100%;
+      /* max-width: 1200px; */ /* Hapus max-width agar mengikuti main */
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .product-filters {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+
+    .search-container { /* Ini untuk filter di halaman produk */
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-dark-4);
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .search-input {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      outline: none;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .category-button {
+      background-color: var(--bg-dark-3);
+      color: var(--text-light);
+      border: 1px solid var(--border-dark);
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .category-button.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .product-card {
+      background-color: var(--bg-dark-3);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--bg-dark-4);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-info h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    .product-description {
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-weight: bold;
+      color: var(--primary-color);
+      font-size: 1rem;
+    }
+
+    .product-stock {
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+
+    .add-to-cart-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .add-to-cart-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .no-products-found {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2rem;
+      background-color: var(--bg-dark-3);
+      border-radius: 8px;
+      color: #aaa;
+    }
+
+    /* --- Cart Page --- */
+    .cart-page {
+      text-align: left;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--bg-dark-3);
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+
+    .empty-cart p {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .cart-items {
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-dark);
+      background-color: var(--bg-dark-3);
+      gap: 1rem;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-image img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .cart-item-details {
+      flex-grow: 1;
+    }
+
+    .cart-item-details h3 {
+      margin: 0 0 0.3rem 0;
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    .cart-item-price {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity-button {
+      background-color: var(--bg-dark-4);
+      color: var(--text-light);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .quantity-button:hover {
+      background-color: #555; /* Sedikit lebih terang */
+    }
+
+    .quantity-value {
+      min-width: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: var(--text-light);
+    }
+
+    .cart-item-subtotal {
+      min-width: 100px;
+      text-align: right;
+      font-weight: bold;
+      color: var(--text-light);
+    }
+
+    .cart-item-remove .remove-button {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .cart-item-remove .remove-button:hover {
+      color: #ff4d4d;
+    }
+
+    .cart-summary {
+      background-color: var(--bg-dark-3);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .cart-totals {
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      color: #ccc;
+    }
+
+    .cart-total-row.cart-grand-total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-light);
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .cart-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .continue-shopping-button,
+    .checkout-button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .continue-shopping-button {
+      background-color: var(--bg-dark-4);
+      color: var(--text-light);
+      border: 1px solid #777;
+    }
+    .continue-shopping-button:hover {
+      background-color: #555;
+    }
+
+    .checkout-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+    }
+    .checkout-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* --- Checkout Page --- */
+    .checkout-page {
+      text-align: left;
+    }
+
+    .empty-checkout {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--bg-dark-3);
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    .empty-checkout p {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .checkout-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .checkout-form-container {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .order-summary {
+      flex: 1;
+      min-width: 250px;
+      background-color: var(--bg-dark-3);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-dark);
+      height: fit-content;
+    }
+
+    .checkout-form .form-section {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .checkout-form .form-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .checkout-form h2 {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--primary-color);
+      padding-left: 0.8rem;
+      text-align: left; /* Judul form rata kiri */
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="email"], /* Tambahkan style untuk email */
+    .form-group input[type="password"], /* Tambahkan style untuk password */
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      background-color: var(--bg-dark-4);
+      color: var(--text-light);
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+    }
+    .form-group textarea {
+      resize: vertical;
+    }
+    .form-group input.error,
+    .form-group textarea.error {
+      border-color: #ff6b6b;
+    }
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+      display: block;
+      text-align: left; /* Error rata kiri */
+    }
+
+    .delivery-options, .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .delivery-option, .payment-option {
+      position: relative;
+    }
+
+    .delivery-option input[type="radio"],
+    .payment-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .delivery-label, .payment-label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem;
+      border: 1px solid var(--border-dark);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background-color: var(--bg-dark-4);
+    }
+
+    .delivery-option input[type="radio"]:checked + .delivery-label,
+    .payment-option input[type="radio"]:checked + .payment-label {
+      border-color: var(--primary-color);
+      background-color: #3a5a3b;
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+
+    .delivery-icon, .payment-icon {
+      color: #ccc;
+    }
+    .delivery-option input[type="radio"]:checked + .delivery-label .delivery-icon,
+    .payment-option input[type="radio"]:checked + .payment-label .payment-icon {
+      color: var(--primary-color);
+    }
+
+    .delivery-text, .payment-text {
+      color: var(--text-light);
+    }
+
+    .place-order-button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    .place-order-button:hover {
+      background-color: var(--primary-dark);
+    }
+    .place-order-button:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+
+    .order-summary h2 {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .order-items {
+      margin-bottom: 1.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .order-item-quantity {
+      margin-right: 0.5rem;
+      color: #aaa;
+    }
+
+    .order-item-name {
+      flex-grow: 1;
+      margin-right: 1rem;
+      text-align: left;
+    }
+
+    .order-item-price {
+      white-space: nowrap;
+      color: var(--text-light);
+    }
+
+    .order-totals {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 1rem;
+    }
+
+    .order-total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      color: #ccc;
+    }
+
+    .order-total-row.order-grand-total {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-light);
+      margin-top: 1rem;
+    }
+
+    /* --- Order Success Page --- */
+    .order-success-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      background-color: var(--bg-dark-3);
+      border-radius: 8px;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .success-icon {
+      margin-bottom: 1.5rem;
+    }
+
+    .order-success-page h1 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .success-message {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .order-info {
+      background-color: var(--bg-dark-4);
+      padding: 1rem 1.5rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+
+    .order-number {
+      font-weight: bold;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    .order-info p {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .success-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .home-button, .shop-more-button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .home-button {
+      background-color: var(--bg-dark-4);
+      color: var(--text-light);
+      border: 1px solid #777;
+    }
+    .home-button:hover {
+      background-color: #555;
+    }
+
+    .shop-more-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+    }
+    .shop-more-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* --- Auth Pages (Login & Register) --- */
+    .auth-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 0; /* Beri padding atas bawah */
+    }
+
+    .auth-container {
+      background-color: var(--bg-dark-3);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-dark);
+      width: 100%;
+      max-width: 400px; /* Batasi lebar form auth */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center; /* Pusatkan konten di dalam container */
+    }
+
+    .auth-container h1 {
+      margin-bottom: 2rem;
+      color: var(--text-light);
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem; /* Jarak antar elemen form */
+      text-align: left; /* Label dan input rata kiri */
+    }
+
+    .auth-form .form-group label {
+      font-weight: 500; /* Buat label sedikit bold */
+    }
+
+    .auth-button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem; /* Beri jarak atas */
+    }
+    .auth-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .auth-switch {
+      margin-top: 1.5rem;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    .auth-switch a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .auth-switch a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Profile Page --- */
+    .profile-page {
+      max-width: 600px; /* Batasi lebar halaman profil */
+      margin: 2rem auto; /* Pusatkan halaman profil */
+      background-color: var(--bg-dark-3);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-dark);
+      text-align: left;
+    }
+
+    .profile-page h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #ccc;
+      font-size: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .profile-info:last-of-type {
+        border-bottom: none;
+    }
+
+    .profile-info span {
+      min-width: 80px; /* Agar label rata */
+    }
+
+    .profile-info strong {
+      color: var(--text-light);
+    }
+
+    .logout-button {
+      background-color: #ff6b6b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      align-self: center; /* Pusatkan tombol logout */
+    }
+    .logout-button:hover {
+      background-color: #ff4d4d;
+    }
+
+
+    /* --- Light Mode --- */
+    @media (prefers-color-scheme: light) {
+      :root {
+        color: var(--text-dark);
+        background-color: var(--bg-light-1);
+      }
+      body {
+        background-color: var(--bg-light-2); /* Background body sedikit abu */
+      }
+      header {
+        background-color: var(--bg-light-1);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      nav a, .login-link, .user-menu a {
+        color: var(--text-dark);
+      }
+      nav a:hover, .login-link:hover, .user-menu a:hover {
+        background-color: var(--bg-light-3);
+      }
+      nav a.active, .login-link.active, .user-menu a.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+      .cart-icon-link {
+        color: var(--text-dark);
+      }
+      .cart-icon-link:hover {
+        background-color: var(--bg-light-3);
+      }
+      .cart-icon-link.active {
+        background-color: var(--primary-color);
+        color: white; /* Pastikan ikon putih saat aktif */
+      }
+      .logout-button-header {
+        color: #f44336; /* Merah terang */
+      }
+      .logout-button-header:hover {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: #d32f2f; /* Merah lebih gelap saat hover */
+      }
+
+      main {
+        background-color: var(--bg-light-1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      footer {
+        color: #555;
+        background-color: var(--bg-light-2);
+      }
+      h1, h2 {
+        color: var(--text-dark);
+      }
+      .hero-section h1 {
+        color: var(--text-dark);
+      }
+      .hero-section p {
+        color: #555;
+      }
+      .search-bar-container {
+        background-color: var(--bg-light-3);
+      }
+      .search-bar-container input {
+        color: var(--text-dark);
+      }
+      .search-bar-container input::placeholder {
+        color: #777;
+      }
+      .product-card {
+        background-color: var(--bg-light-1);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border: 1px solid var(--border-light);
+      }
+      .product-info h3 {
+        color: var(--text-dark);
+      }
+      .product-description {
+        color: #666;
+      }
+      .product-stock {
+        color: #777;
+      }
+      .no-products-found {
+        background-color: var(--bg-light-2);
+        color: #555;
+      }
+      .search-container {
+        background-color: var(--bg-light-3);
+      }
+      .search-input {
+        color: var(--text-dark);
+      }
+      .category-button {
+        background-color: var(--bg-light-3);
+        color: var(--text-dark);
+        border-color: var(--border-light);
+      }
+      .category-button.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+      .cart-items {
+        border-color: var(--border-light);
+      }
+      .cart-item {
+        background-color: var(--bg-light-1);
+        border-bottom-color: var(--border-light);
+      }
+      .cart-item-details h3 {
+        color: var(--text-dark);
+      }
+      .cart-item-price {
+        color: #666;
+      }
+      .quantity-button {
+        background-color: var(--bg-light-3);
+        color: var(--text-dark);
+      }
+      .quantity-button:hover {
+        background-color: #ddd;
+      }
+      .quantity-value {
+        color: var(--text-dark);
+      }
+      .cart-item-subtotal {
+        color: var(--text-dark);
+      }
+      .cart-summary {
+        background-color: var(--bg-light-2);
+        border-color: var(--border-light);
+      }
+      .cart-total-row {
+        color: #555;
+      }
+      .cart-total-row.cart-grand-total {
+        color: var(--text-dark);
+        border-top-color: var(--border-light);
+      }
+      .continue-shopping-button {
+        background-color: #f0f0f0;
+        color: var(--text-dark);
+        border-color: var(--border-light);
+      }
+      .continue-shopping-button:hover {
+        background-color: #e0e0e0;
+      }
+      .order-summary {
+        background-color: var(--bg-light-2);
+        border-color: var(--border-light);
+      }
+      .checkout-form .form-section {
+        border-bottom-color: var(--border-light);
+      }
+      .checkout-form h2 {
+        color: var(--text-dark);
+      }
+      .form-group label {
+        color: #555;
+      }
+      .form-group input[type="text"],
+      .form-group input[type="tel"],
+      .form-group input[type="email"],
+      .form-group input[type="password"],
+      .form-group textarea {
+        border-color: var(--border-light);
+        background-color: var(--bg-light-1);
+        color: var(--text-dark);
+      }
+      .delivery-label, .payment-label {
+        border-color: var(--border-light);
+        background-color: var(--bg-light-1);
+      }
+      .delivery-option input[type="radio"]:checked + .delivery-label,
+      .payment-option input[type="radio"]:checked + .payment-label {
+        border-color: var(--primary-color);
+        background-color: #e8f5e9;
+      }
+      .delivery-icon, .payment-icon {
+        color: #777;
+      }
+      .delivery-option input[type="radio"]:checked + .delivery-label .delivery-icon,
+      .payment-option input[type="radio"]:checked + .payment-label .payment-icon {
+        color: var(--primary-color);
+      }
+      .delivery-text, .payment-text {
+        color: var(--text-dark);
+      }
+      .order-item {
+        color: #555;
+      }
+      .order-item-quantity {
+        color: #777;
+      }
+      .order-item-price {
+        color: var(--text-dark);
+      }
+      .order-totals {
+        border-top-color: var(--border-light);
+      }
+      .order-total-row {
+        color: #555;
+      }
+      .order-total-row.order-grand-total {
+        color: var(--text-dark);
+      }
+      .order-success-page {
+        background-color: var(--bg-light-2);
+      }
+      .success-message {
+        color: #555;
+      }
+      .order-info {
+        background-color: var(--bg-light-3);
+      }
+      .order-number {
+        color: var(--text-dark);
+      }
+      .order-info p {
+        color: #666;
+      }
+      .home-button {
+        background-color: #f0f0f0;
+        color: var(--text-dark);
+        border-color: var(--border-light);
+      }
+      .home-button:hover {
+        background-color: #e0e0e0;
+      }
+      .empty-cart, .empty-checkout {
+        background-color: var(--bg-light-2);
+      }
+      .empty-cart p, .empty-checkout p {
+        color: #555;
+      }
+      .auth-container {
+        background-color: var(--bg-light-1);
+        border-color: var(--border-light);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .auth-container h1 {
+        color: var(--text-dark);
+      }
+      .auth-switch {
+        color: #555;
+      }
+      .profile-page {
+        background-color: var(--bg-light-1);
+        border-color: var(--border-light);
+      }
+      .profile-info {
+        color: #555;
+        border-bottom-color: var(--border-light);
+      }
+      .profile-info strong {
+        color: var(--text-dark);
+      }
+    }
