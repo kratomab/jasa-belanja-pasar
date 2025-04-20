@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { useNotifications } from '../context/NotificationContext';
 import { useNavigate } from 'react-router-dom';
+import { saveOrderToDatabase } from '../services/firebase';
 import { Check, CreditCard, Wallet, Truck, Clock } from 'lucide-react';
 
 function CheckoutPage() {
   const { cart, clearCart } = useCart();
+  const { user } = useAuth();
+  const { addNotification } = useNotifications();
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -72,8 +77,8 @@ function CheckoutPage() {
     return Object.keys(newErrors).length === 0;
   };
   
-  // 处理表单提交
-  const handleSubmit = (e) => {
+  // Menangani submit form
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -82,23 +87,41 @@ function CheckoutPage() {
     
     setIsSubmitting(true);
     
-    // 模拟订单处理
-    setTimeout(() => {
-      // 在实际应用中，这里会发送订单数据到服务器
-      console.log('Order submitted:', {
+    try {
+      // Buat objek pesanan
+      const orderData = {
         customer: formData,
         items: cart.items,
-        totalPrice: cart.totalPrice
+        totalPrice: cart.totalPrice,
+        userId: user?.id || 'guest',
+        orderDate: new Date().toISOString(),
+        status: 'pending'
+      };
+      
+      // Simpan pesanan ke database
+      const savedOrder = await saveOrderToDatabase(orderData);
+      console.log('Order submitted:', savedOrder);
+      
+      // Buat notifikasi untuk pesanan baru
+      addNotification({
+        title: 'Pesanan Baru',
+        message: `Pesanan baru dengan ID ${savedOrder.id} telah dibuat`,
+        type: 'order',
+        orderId: savedOrder.id
       });
       
-      // 清空购物车
+      // Bersihkan keranjang
       clearCart();
       
-      // 导航到成功页面
+      // Navigasi ke halaman sukses
       navigate('/order-success');
-      
+    } catch (error) {
+      console.error('Gagal memproses pesanan:', error);
+      // Tambahkan penanganan error di sini
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
+  };
   };
   
   // 如果购物车为空，重定向到产品页面

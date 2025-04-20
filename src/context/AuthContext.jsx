@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { saveUserToDatabase, getUserFromDatabase } from '../services/firebase';
 
     const AuthContext = createContext(null);
 
@@ -6,30 +7,50 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
       const [user, setUser] = useState(null);
       const [loading, setLoading] = useState(true); // State untuk loading awal
 
-      // Coba ambil data user dari localStorage saat komponen dimuat
+      // Coba ambil data user dari localStorage dan database saat komponen dimuat
       useEffect(() => {
-        try {
-          const storedUser = localStorage.getItem('authUser');
-          if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        const loadUser = async () => {
+          try {
+            const storedUser = localStorage.getItem('authUser');
+            if (storedUser) {
+              const userData = JSON.parse(storedUser);
+              setUser(userData);
+              
+              // Coba ambil data terbaru dari database
+              if (userData.id) {
+                const dbUser = await getUserFromDatabase(userData.id);
+                if (dbUser) {
+                  setUser(dbUser);
+                  localStorage.setItem('authUser', JSON.stringify(dbUser));
+                }
+              }
+            }
+          } catch (error) {
+            console.error("Gagal memuat user dari penyimpanan:", error);
+            localStorage.removeItem('authUser'); // Hapus data korup jika ada
+          } finally {
+            setLoading(false); // Selesai loading
           }
-        } catch (error) {
-          console.error("Gagal memuat user dari localStorage:", error);
-          localStorage.removeItem('authUser'); // Hapus data korup jika ada
-        } finally {
-          setLoading(false); // Selesai loading
-        }
+        };
+        
+        loadUser();
       }, []);
 
-      // Fungsi login sederhana (simulasi)
-      const login = (userData) => {
-        // Di aplikasi nyata, ini akan melibatkan panggilan API ke backend
-        const fakeUserData = { id: 'user123', name: userData.name || 'Pengguna Baru', email: userData.email };
-        setUser(fakeUserData);
+      // Fungsi login dengan penyimpanan ke database
+      const login = async (userData) => {
         try {
-          localStorage.setItem('authUser', JSON.stringify(fakeUserData));
+          // Simpan data pengguna ke database
+          const savedUser = await saveUserToDatabase({
+            id: 'user_' + Date.now(),
+            name: userData.name || 'Pengguna Baru', 
+            email: userData.email,
+            createdAt: new Date().toISOString()
+          });
+          
+          setUser(savedUser);
+          localStorage.setItem('authUser', JSON.stringify(savedUser));
         } catch (error) {
-          console.error("Gagal menyimpan user ke localStorage:", error);
+          console.error("Gagal menyimpan user ke database:", error);
         }
       };
 

@@ -1,17 +1,18 @@
 import React from 'react';
-    import { Routes, Route, Navigate } from 'react-router-dom'; // Import Navigate
-    import Header from './components/Header';
-    import Footer from './components/Footer';
-    import HomePage from './pages/HomePage';
-    import ProductPage from './pages/ProductPage';
-    import CartPage from './pages/CartPage';
-    import CheckoutPage from './pages/CheckoutPage';
-    import OrderSuccessPage from './pages/OrderSuccessPage';
-    import LoginPage from './pages/LoginPage';         // Import halaman baru
-    import RegisterPage from './pages/RegisterPage';   // Import halaman baru
-    import ProfilePage from './pages/ProfilePage';     // Import halaman baru
-    import { CartProvider } from './context/CartContext';
-    import { AuthProvider, useAuth } from './context/AuthContext'; // Import AuthProvider dan useAuth
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { NotificationProvider } from './context/NotificationContext';
 
     // Komponen untuk melindungi rute
     function ProtectedRoute({ children }) {
@@ -68,10 +69,12 @@ import React from 'react';
 
     function App() {
       return (
-        <AuthProvider> {/* AuthProvider membungkus CartProvider dan AppContent */}
-          <CartProvider>
-             <AppContent />
-          </CartProvider>
+        <AuthProvider> {/* AuthProvider membungkus NotificationProvider */}
+          <NotificationProvider> {/* NotificationProvider membungkus CartProvider */}
+            <CartProvider>
+              <AppContent />
+            </CartProvider>
+          </NotificationProvider>
         </AuthProvider>
       );
     }

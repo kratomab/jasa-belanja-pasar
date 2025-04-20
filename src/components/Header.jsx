@@ -4,6 +4,7 @@ import React from 'react';
     import SearchBar from './SearchBar';
     import { useAuth } from '../context/AuthContext';
     import { useCart } from '../context/CartContext'; // Import useCart
+    import NotificationBadge from './NotificationBadge';
 
     function Header() {
       const { isAuthenticated, user, logout, loading } = useAuth();
@@ -49,6 +50,10 @@ import React from 'react';
                 <span className="cart-badge">{cart.totalItems}</span>
               )}
             </NavLink>
+            
+            {isAuthenticated && (
+              <NotificationBadge />
+            )}
 
             {loading ? (
               <div className="loading-spinner"></div> /* Tampilkan spinner saat loading */
