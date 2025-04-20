@@ -122,7 +122,6 @@ function CheckoutPage() {
       setIsSubmitting(false);
     }
   };
-  };
   
   // 如果购物车为空，重定向到产品页面
   if (cart.items.length === 0) {
